@@ -1,0 +1,2 @@
+web: gunicorn config.wsgi --workers 2
+release: python manage.py migrate --noinput

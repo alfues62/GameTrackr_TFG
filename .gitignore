@@ -1,0 +1,33 @@
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+# Python / Django
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+staticfiles/
+# Ficheros subidos
+backend/media/
+venv/
+.venv/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+npm-debug.log*
+
+# Editores / IDE
+.vscode/
+.idea/
+*.swp
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

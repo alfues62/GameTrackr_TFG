@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --accent: #f97316;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Barra de scroll fina y discreta para carruseles horizontales. */
+  .scrollbar-slim {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgb(212 212 212 / 0.8) transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar {
+    height: 5px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background: rgb(163 163 163 / 0.4);
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb:hover {
+    background: rgb(163 163 163 / 0.7);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Relleno del segmento activo de la cola de descubrimiento (estilo stories). */
+@keyframes discovery-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
