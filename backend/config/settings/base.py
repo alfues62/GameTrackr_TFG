@@ -207,6 +207,9 @@ AUTHENTICATION_BACKENDS = (
 # Google OAuth2
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('GOOGLE_CLIENT_ID', default='')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('GOOGLE_CLIENT_SECRET', default='')
+# Sin esto, Google reutiliza en silencio la sesión ya activa en el navegador
+# (SSO) y nunca deja elegir cuenta: quien pulse "Entrar con Google" entraría
+# siempre con la última cuenta de Google usada en ese navegador.
 SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {'prompt': 'select_account'}
 
 # Steam (usa la Web API Key)
@@ -221,6 +224,10 @@ SOCIAL_AUTH_FRONTEND_URL = config('NEXTAUTH_URL', default='http://localhost:3000
 # Pipeline: el flujo estándar de social-auth + pasos propios (vincular Steam,
 # copiar avatar de Google y, como paso final, emitir JWT y redirigir al frontend).
 SOCIAL_AUTH_PIPELINE = (
+    # Ignora cualquier sesión de Django ya autenticada (ver docstring): sin
+    # esto, elegir otra cuenta de Google en un login nuevo podía terminar
+    # entrando con la cuenta de la sesión anterior.
+    'apps.core.pipeline.discard_stale_session',
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
     'social_core.pipeline.social_auth.auth_allowed',
